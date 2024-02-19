@@ -1,6 +1,5 @@
 **/.vs
 */local.settings.json
-*/config.json
-*/Properties
+*/Properties/Resources.resx
 */bin
 */obj

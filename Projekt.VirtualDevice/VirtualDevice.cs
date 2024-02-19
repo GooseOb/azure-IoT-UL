@@ -169,7 +169,7 @@ namespace Projekt.VirtualDevice
 
         private static async Task<MethodResponse> DefaultServiceHandler(MethodRequest methodRequest, object userContext)
         {
-            Console.WriteLine($"\t{DateTime.Now}> METHOD NOT EXIST: {methodRequest.Name}");
+            Console.WriteLine($"\t{DateTime.Now}> METHOD DOES NOT EXIST: {methodRequest.Name}");
             return new MethodResponse(0);
         }
 
