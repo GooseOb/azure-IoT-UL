@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "IotHubs_zajecia_iot_ul_322_connectionString": {
+            "value": null
+        },
+        "IotHubs_zajecia_iot_ul_322_containerName": {
+            "value": null
+        },
+        "namespaces_zajecia_iot_name": {
+            "value": null
+        },
+        "IotHubs_zajecia_iot_ul_322_name": {
+            "value": null
+        },
+        "serverfarms_AustraliaCentralPlan_name": {
+            "value": null
+        },
+        "components_zajecia_iot_ul_432_name": {
+            "value": null
+        },
+        "storageAccounts_zajeciaiot91f8_name": {
+            "value": null
+        },
+        "components_ProjektFunctionApps_name": {
+            "value": null
+        },
+        "streamingjobs_asa_latest_name": {
+            "value": null
+        },
+        "storageAccounts_csb100320021fb496a2_name": {
+            "value": null
+        },
+        "workspaces_ProjektFunctionApps_name": {
+            "value": null
+        },
+        "actionGroups_Application_Insights_Smart_Detection_name": {
+            "value": null
+        },
+        "smartdetectoralertrules_failure_anomalies___zajecia_iot_ul_432_name": {
+            "value": null
+        },
+        "smartdetectoralertrules_failure_anomalies___projektfunctionapps_name": {
+            "value": null
+        },
+        "workspaces_DefaultWorkspace_cc616689_62ca_4cfd_ae64_77b19c29f3fe_WEU_externalid": {
+            "value": null
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "devices": [
+    [ "ns=2;s=Device 1", "Device_1" ],
+    [ "ns=2;s=Device 2", "Device_2" ],
+    [ "ns=2;s=Device 3", "Device_3" ],
+    [ "ns=2;s=Device 4", "Device_4" ],
+    [ "ns=2;s=Device 5", "Device_5" ],
+    [ "ns=2;s=Device 6", "Device_6" ]
+  ]
+}
