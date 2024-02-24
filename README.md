@@ -62,7 +62,7 @@ Example of sending a D2C error message:
 ```
 Error from device Device_1 was reported
 Sending data to IoT Hub...
-05.01.2024 10:45:32> D2C Sending message: {"opc_device_id":"ns=2; s=Device 1" "iot_device_id":"Device_1","is_error": true, "error_unknown": false, "error_sen
+05.01.2024 10:45:32> D2C Sending message: {"opc_device_id":"ns=2;s=Device 1" "iot_device_id":"Device_1","is_error": true, "error_unknown": false, "error_sen
 sor": false, "error_power":true,"error_emergency_stop":false}
 05.01.2024 10:45:32> Device Twin value was updated.
 ```
