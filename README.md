@@ -111,8 +111,8 @@ Example of data stored in device twin
                 "last_maintenance_date": {
                     "$lastUpdated": "2023-01-05T06:49:20.404008Z"
                 },
-                    "last_error_date": {
-                        "$lastUpdated": "2023-01-05T06:49:20.404008Z"
+                "last_error_date": {
+                    "$lastUpdated": "2023-01-05T06:49:20.404008Z"
                 }
             },
         }
