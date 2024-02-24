@@ -49,7 +49,7 @@ Open and run `Projekt/Projekt.sln` for reading and sending data, and `Projekt.Fu
 
 Data are read from devices and sent to Azure as D2C messages every 5 seconds.
 
-Example of a D2C message:
+Example of sending a D2C message:
 
 ```
 Sending data to IoT Hub...
@@ -57,7 +57,7 @@ Sending data to IoT Hub...
 2404819579332}
 ```
 
-Example of a D2C error message:
+Example of sending a D2C error message:
 
 ```
 Error from device Device_1 was reported
