@@ -53,7 +53,7 @@ Example of sending a D2C message:
 
 ```
 Sending data to IoT Hub...
-05.01.2024 10:40:41> D2C Sending message: {"opc_device_id":"ns=2;s=Device 1" "iot_device_id":"Device_1", "production_status": 1, "workorder_id":"8985f4b3-9 31e-4ad7-9dac-bff281e3be03", "good_count": 0, "bad_count":0,"temperature": 25.04
+05.01.2024 10:40:41> D2C Sending message: {"opc_device_id":"ns=2;s=Device 1", "iot_device_id":"Device_1", "production_status": 1, "workorder_id":"8985f4b3-9 31e-4ad7-9dac-bff281e3be03", "good_count": 0, "bad_count":0, "temperature": 25.04
 2404819579332}
 ```
 
@@ -62,7 +62,7 @@ Example of sending a D2C error message:
 ```
 Error from device Device_1 was reported
 Sending data to IoT Hub...
-05.01.2024 10:45:32> D2C Sending message: {"opc_device_id":"ns=2;s=Device 1" "iot_device_id":"Device_1","is_error": true, "error_unknown": false, "error_sen
+05.01.2024 10:45:32> D2C Sending message: {"opc_device_id":"ns=2;s=Device 1", "iot_device_id":"Device_1", "is_error": true, "error_unknown": false, "error_sen
 sor": false, "error_power":true,"error_emergency_stop":false}
 05.01.2024 10:45:32> Device Twin value was updated.
 ```
