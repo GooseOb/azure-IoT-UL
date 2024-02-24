@@ -21,22 +21,22 @@ Microsoft.NET.Sdk.Functions
 Set `iotDeviceConnectionString`,
 `iotHubOwnerConnectionString`,
 `opcServerAddress` (default is `opc.tcp://localhost:4840/`)
-in your `Projekt/Properties/Resources.resx`
+in your `Projekt/Properties/Resources.resx`.
 
 Set `IoTHubConnectiontring`
-in `Projekt.FunctionsApps/Properties/Resources.resx`
+in `Projekt.FunctionsApps/Properties/Resources.resx`.
 
 In `Projekt.FunctionsApps/local.settings.json`
-set `AzureWebJobsStorage` and `ServiceBusConnectionString`
+set `AzureWebJobsStorage` and `ServiceBusConnectionString`.
 
 Set the list of your devices in `Project/config.json`.
 It should look like this
+
 ```json
 {
     "devices": [
         ["local_device_name_1", "azure_device_name_1"],
         ["local_device_name_2", "azure_device_name_2"]
-        /* ... */
     ]
 }
 ```
@@ -45,7 +45,11 @@ It should look like this
 
 Open and run `Projekt/Projekt.sln` for reading and sending data, and `Projekt.FunctionApps/Projekt.FunctionApps.sln` to call function on triggers.
 
+## D2C messages
+
 Data are read from devices and sent to Azure as D2C messages every 5 seconds.
+
+Example of the D2C message
 
 ```
 Sending data to IoT Hub...
@@ -65,7 +69,7 @@ sor": false, "error_power":true,"error_emergency_stop":false}
 
 ## Device twin 
 
-Example of data sent to device twin
+Example of data stored in device twin
 
 ```json
 {
@@ -118,78 +122,39 @@ Example of data sent to device twin
 
 ## Direct methods
 
-EmergencyStop
+In order to execute direct methods
+you can use Azure IoT Explorer.
 
-```cs
-async Task<MethodResponse> EmergencyStopHandler(MethodRequest methodRequest, object userContext)
+Available methods:
+
+- EmergencyStop
+
+- ResetErrorStatus
+
+- DecreaseProductRate
+
+No payload needed.
+
+If the execution is successful, the response is
+```json
+{
+    "status":0,
+    "payload":null
+}
 ```
 
-ResetErrorStatus
+## Business logic
 
-```cs
-async Task<MethodResponse> ResetErrorStatusHandler(MethodRequest methodRequest, object userContext)
-```
+Features implemented with Stream Analytics job,
+Service Bus queue and Function Apps:
 
-DecreaseProductRate
+- Counting KPI every minute
+    - Triggering rate decrease if less than 90
+- Counting device errors every minute 
+    - Triggering emergency stop if more than 3
 
-```cs
-async Task<MethodResponse> DecreaseProductRateHandler(MethodRequest methodRequest, object userContext)
-```
+Features implemented with Stream Analytics job and Blob storage:
 
-`userContext` is the id of the node
-
-## Analytics
-
-```sql
--- Count KPI every minute and trigger rate decrease if less than 90
-SELECT
-System.Timestamp() time,
-iot_device_id AS deviceId
-INTO [device-decrease-rate]
-FROM [zajecia-iot-ul-322]
-GROUP BY iot_device_id, TumblingWindow(minute, 1)
-HAVING (MAX(good_count)*100)/(MAX(good_count)+MAX(bad_count)) < 90
-
--- Count device errors every minute and trigger emergency stop if more than 3
-SELECT
-System.Timestamp() time,
-iot_device_id AS deviceId,
-SUM(COALESCE(error_emergency_stop,0)) + SUM(COALESCE(error_power,0)) + SUM
-(COALESCE(error_sensor,0)) + SUM(COALESCE(error_unknown,0)) AS errorSum
-INTO [device-emergency-stop]
-FROM [zajecia-iot-ul-322]
-GROUP BY iot_device_id, TumblingWindow(minute, 1)
-HAVING errorSum > 3
-
--- Device production KPI every 5 minutes
-SELECT
-System.Timestamp() time,
-iot_device_id,
-(MAX(good_count)*100)/(MAX(good_count)+MAX(bad_count)) as production_kpi
-INTO [productionkpi]
-FROM [zajecia-iot-ul-322]
-GROUP BY iot_device_id, TumblingWindow(minute, 5)
-
--- Device's temperature every 5 minutes
-SELECT
-System.Timestamp() log_time,
-iot_device_id,
-MAX(temperature) as temperature_max,
-MIN(temperature) as temperature_min,
-AVG(temperature) as temperature_avg
-INTO [devicetemperature]
-FROM [zajecia-iot-ul-322]
-GROUP BY iot_device_id, TumblingWindow(minute, 5)
-
--- Errors per machine every 1 minutes
-SELECT
-System.Timestamp() time,
-iot_device_id,
-SUM(error_unknown) AS error_unknown_count,
-SUM(error_sensor) AS error_sensor_count,
-SUM(error_power) AS error_power_count,
-SUM(error_emergency_stop) AS error_emergency_stop_count
-INTO [deviceerrors]
-FROM [zajecia-iot-ul-322]
-GROUP BY iot_device_id, TumblingWindow(minute, 1)
-```
+- Recording Device production KPI every 5 minutes
+- Recording Device's temperature every 5 minutes
+- Recording number of errors per machine every minute
